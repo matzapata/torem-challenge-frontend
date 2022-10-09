@@ -8,47 +8,44 @@ import { NotificationSuccess } from '../components/Notifications';
 import { LogoType } from '../types/types';
 
 function Header() {
-  const image = logo as unknown as LogoType;
+	const image = logo as unknown as LogoType;
 
-  const userData = useAppSelector(getUser);
-  const dispatch = useAppDispatch();
+	const userData = useAppSelector(getUser);
+	const dispatch = useAppDispatch();
 
-  const signOff = () => {
-    dispatch(setLogoutData());
-    NotificationSuccess('Se ha cerrado la sesión');
-  };
+	const signOff = () => {
+		dispatch(setLogoutData());
+		NotificationSuccess('Se ha cerrado la sesión');
+	};
 
-  return (
-    <Navbar expand="lg" className="mx-4 header header-height w-100" variant="dark">
-      <Container className="mw-100 w-100 d-flex justify-content-between m-0">
-        <Navbar.Brand className="brand-logo">
-          <img src={image.src} className="mh-100 mw-100 d-block" alt="Logo" />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse className="justify-content-end">
-          {userData.authToken ? (
-            <Nav className="d-flex gap-3">
-              <Link href="/login" className="nav-item" onClick={signOff}>
-                Abandonar Sesión
-              </Link>
-            </Nav>
-          ) : (
-            <Nav className="d-flex gap-3">
-              <Link href="/" className="nav-item">
-                Información de la Empresa
-              </Link>
-              <Link href="/register" className="nav-item">
-                Registrarse
-              </Link>
-              <Link href="/" className={'nav-item active'}>
-                Iniciar Sesión
-              </Link>
-            </Nav>
-          )}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
+	return (
+		<Navbar expand="lg" className="mx-4 header header-height w-100" variant="dark">
+			<Container className="mw-100 w-100 d-flex justify-content-between m-0">
+				<Navbar.Brand className="brand-logo">
+					<img src={image.src} className="mh-100 mw-100 d-block" alt="Logo" />
+				</Navbar.Brand>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+				<Navbar.Collapse className="justify-content-end">
+					{userData.authToken ? (
+						<Nav className="d-flex gap-3">
+							<Link href="/login" className="nav-item" onClick={signOff}>
+								Abandonar Sesión
+							</Link>
+						</Nav>
+					) : (
+						<Nav className="d-flex gap-3">
+							<Link href="/register" className="nav-item">
+								Registrarse
+							</Link>
+							<Link href="/" className={'nav-item active'}>
+								Iniciar Sesión
+							</Link>
+						</Nav>
+					)}
+				</Navbar.Collapse>
+			</Container>
+		</Navbar>
+	);
 }
 
 export default Header;

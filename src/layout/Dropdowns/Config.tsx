@@ -20,8 +20,8 @@ function ConfigDropdown(dropDownProps: DropDownProps) {
   const handleConfirmDelete = () => {
     /* 
       TODO: 
-      1. Get the current user data 
-      2. Delete the user 
+      1. Get current user data 
+      2. Delete user 
     */
   };
 

@@ -1,5 +1,11 @@
 import { toast } from 'react-toastify';
 
-export const NotificationSuccess = (text: string) => {};
-export const NotificationFailure = (text: string) => {};
-export const NotificationWarning = (text: string) => {};
+export const NotificationSuccess = (text: string) => {
+	// TODO
+};
+export const NotificationFailure = (text: string) => {
+	// TODO
+};
+export const NotificationWarning = (text: string) => {
+	// TODO
+};
