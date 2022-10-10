@@ -60,6 +60,10 @@ Se deben completar todas las secciones que estén marcadas como `TODO`. Entre el
 
 Se valora un buen diseño, eficiente y mantenible. No hay problema en crear directorios o archivos para ayudarse si se considera necesario.
 
+## Tests
+
+Se deben realizar los test en [cypress](https://www.cypress.io) que se consideren necesarios para testear la funcionalidad de **enviar mensaje**.
+
 ## Tecnologías
 
 - React
