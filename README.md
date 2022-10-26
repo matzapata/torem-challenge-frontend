@@ -52,13 +52,13 @@ El objetivo de esta evaluación es construir por encima de un maquetado establec
 
 Para correrla, basta con clonar el repositorio, abrir una nueva terminal en la carpeta y escribir el comando `npm start`. Este comando levantará la aplicación en el puerto local 8080 y se le puede consultar mediante la URL: http://localhost:8080.
 
-No hace falta modificar ni alterar ningún archivo del repositorio. Todas las instrucciones para el uso de los endpoints, sockets y respuestas a las consultas http se encuentran en el archivo `README.md`.
+Todas las instrucciones para el uso de los endpoints, sockets y respuestas a las consultas http se encuentran en el archivo `README.md`.
 
 ## Evaluación
 
 Se deben completar todas las secciones que estén marcadas como `TODO`. Entre ellas están el inicio de sesión, registrarse, enviar mensaje, obtener los mensajes, etc.
 
-Se valora un buen diseño, eficiente y mantenible. No hay problema en crear directorios o archivos para ayudarse si se considera necesario.
+Se valora un buen diseño, eficiente y mantenible. Incentivamos a crear directorios, archivos o hooks para ayudarse a mantener órden y desacomplamiento.
 
 ## Tests
 
