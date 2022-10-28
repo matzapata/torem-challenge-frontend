@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import ConfirmDialog from '../../components/ConfirmDialog';
-import NewChatModal from '../../components/HomeChat/NewChatModal';
+import ConfirmDialog from '../../components/cconfirmDialog';
+import NewChatModal from '../../components/HomeChat/nnewChatModal';
 import { DropDownProps } from '../../types/chat';
 
 function ConfigDropdown(dropDownProps: DropDownProps) {

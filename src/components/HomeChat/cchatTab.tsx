@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { IoCheckmarkDoneOutline } from 'react-icons/io5';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { ChatTabProps } from '../../types/chat';
-import ConfirmDialog from '../ConfirmDialog';
+import ConfirmDialog from '../cconfirmDialog';
 
 const Container = styled.div<{ isSelected: boolean }>`
   display: flex;

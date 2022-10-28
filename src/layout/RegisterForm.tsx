@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import FormData from 'form-data';
 
 import { RegisterData } from '../types/register';
-import Field from '../components/Home/Field';
+import Field from '../components/Home/ffield';
 
 function Register() {
   const initialValues: RegisterData = {
