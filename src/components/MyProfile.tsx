@@ -1,4 +1,4 @@
-import { MyProfileProps } from '../types/types';
+import { MyProfileProps } from '../types/chat';
 
 function MyProfile(myProfileProps: MyProfileProps) {
   const { name, lastName, email, photo } = myProfileProps;
@@ -6,11 +6,7 @@ function MyProfile(myProfileProps: MyProfileProps) {
   return (
     <div className="myProfile d-flex flex-row gap-3 align-items-center text-no-selection">
       <div className="myProfilePhoto cursor-pointer">
-        <img
-          src={`http://localhost:8080/${photo?.substring(5)}`}
-          alt="ProfilePhoto"
-          className="image"
-        />
+        <img src={`http://localhost:8080/${photo}`} alt="ProfilePhoto" className="image" />
       </div>
       <div className="myProfileData">
         <div className="myProfileId fw-bold">

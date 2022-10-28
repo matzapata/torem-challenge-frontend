@@ -4,8 +4,8 @@ import logo from '../assets/images/logo_chatter_color_2.png';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { getUser, setLogoutData } from '../redux/userSlice';
-import { NotificationSuccess } from '../components/Notifications';
-import { LogoType } from '../types/types';
+import { LogoType } from '../types/chat';
+import { toast } from 'react-toastify';
 
 function Header() {
   const image = logo as unknown as LogoType;
@@ -15,7 +15,6 @@ function Header() {
 
   const signOff = () => {
     dispatch(setLogoutData());
-    NotificationSuccess('Se ha cerrado la sesión');
   };
 
   return (

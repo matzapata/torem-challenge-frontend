@@ -1,16 +1,16 @@
-import Link from "next/link";
-import { useRef, useState } from "react";
+import Link from 'next/link';
+import { useRef, useState } from 'react';
+import FormData from 'form-data';
 
-import FormData from "form-data";
-import Field from "../components/Home/Field";
-import { RegisterData } from "../types/types";
+import { RegisterData } from '../types/register';
+import Field from '../components/Home/Field';
 
 function Register() {
   const initialValues: RegisterData = {
-    name: "",
-    lastName: "",
-    email: "",
-    password: "",
+    name: '',
+    lastName: '',
+    email: '',
+    password: ''
   };
 
   const [selectedImage, setSelectedImage] = useState<any | null>(null);
@@ -37,16 +37,15 @@ function Register() {
   };
 
   const handleRegister = () => {
-    data.append("image", selectedImage);
-    data.append("name", formData.name);
-    data.append("lastName", formData.lastName);
-    data.append("email", formData.email);
-    data.append("password", formData.password);
+    data.append('image', selectedImage);
+    data.append('name', formData.name);
+    data.append('lastName', formData.lastName);
+    data.append('email', formData.email);
+    data.append('password', formData.password);
     /* 
       TODO: 
       1. Make a new user
-      2. Display a sucess notification (or error)
-      3. Redirect to login screen
+      2. Display a sucess notification (or error).
     */
   };
 
@@ -88,7 +87,7 @@ function Register() {
           <input
             type="file"
             ref={hiddenFileInput}
-            style={{ display: "none" }}
+            style={{ display: 'none' }}
             onChange={handleImageChange}
           />
         </label>
@@ -102,19 +101,13 @@ function Register() {
         onChange={handleInputChange}
       />
 
-      <div
-        className="content d-flex flex-column mb-3 d-flex align-items-start"
-        data-aos="fade"
-      >
+      <div className="content d-flex flex-column mb-3 d-flex align-items-start" data-aos="fade">
         <button className="btn btn-primary" onClick={handleRegister}>
           Registrarse
         </button>
       </div>
 
-      <div
-        className="content text d-flex flex-row gap-2 fs-6 fst-italic"
-        data-aos="fade"
-      >
+      <div className="content text d-flex flex-row gap-2 fs-6 fst-italic" data-aos="fade">
         <span>¿Ya tienes una cuenta?</span>
         <Link href="/" className="text-chatter-blue">
           Inicia sesión aquí

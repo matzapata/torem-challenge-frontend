@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-import { ChatsMessagesProps } from '../../types/types';
+import { ChatsMessagesProps } from '../../types/chat';
 
 const Container = styled.div`
   display: flex;
@@ -30,10 +30,13 @@ const Message = styled.div<{ isReceived: boolean }>`
   gap: 5px;
   background-color: ${(props) => (props.isReceived ? 'white' : '#36dd81')};
   color: #101111;
-  color: var(--chatter-black);
   border-radius: 10px;
   z-index: 3;
 `;
+
+const TextWrapper = styled.p``;
+
+const TimeDate = styled.p``;
 
 function ChatMessages(chatMessagesProps: ChatsMessagesProps) {
   const { chatsData, chatId, setUserChatData } = chatMessagesProps;
@@ -43,7 +46,7 @@ function ChatMessages(chatMessagesProps: ChatsMessagesProps) {
 
   useEffect(() => {
     setUserChatData(chatMessages[0]);
-    // NOTE: Ref for position the chat at the end by default
+    // NOTE: Ref for position chat at end by default
     positionRef.current.scrollIntoView();
   }, [chatMessages, setUserChatData]);
 
@@ -53,8 +56,10 @@ function ChatMessages(chatMessagesProps: ChatsMessagesProps) {
         {chatMessages[0]
           ? chatMessages[0].messages.map((msg: any, index: any) => (
               <Message key={index} isReceived={msg.received}>
-                <div>{msg.message}</div>
-                <div className="chat-message-time">{msg.timeDate.slice(11, 16) + ' p.m.'}</div>
+                <TextWrapper>{msg.message}</TextWrapper>
+                <TimeDate className="chat-message-time">
+                  {msg.timeDate.slice(11, 16) + ' p.m.'}
+                </TimeDate>
               </Message>
             ))
           : null}

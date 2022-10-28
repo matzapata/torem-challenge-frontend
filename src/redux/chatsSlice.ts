@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { Chat, ChatsState } from '../types/types';
+import { Chat, ChatsState } from '../types/chat';
 
 const initialState: ChatsState = {
   chats: [],

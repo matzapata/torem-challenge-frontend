@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import NewChatModal from '../../components/HomeChat/NewChatModal';
-import { DropDownProps } from '../../types/types';
+import { DropDownProps } from '../../types/chat';
 
 function ConfigDropdown(dropDownProps: DropDownProps) {
   const { getChatsData, userData, isOpen } = dropDownProps;
@@ -20,8 +20,8 @@ function ConfigDropdown(dropDownProps: DropDownProps) {
   const handleConfirmDelete = () => {
     /* 
       TODO: 
-      1. Get the current user data 
-      2. Delete the user 
+      1. Get current user data 
+      2. Delete user 
     */
   };
 

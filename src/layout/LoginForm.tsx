@@ -1,13 +1,13 @@
-import Field from "../components/Home/Field";
-import React, { useState } from "react";
-import { LoginData } from "../types/types";
-import FormData from "form-data";
-import Link from "next/link";
+import Field from '../components/Home/Field';
+import React, { useState } from 'react';
+import FormData from 'form-data';
+import Link from 'next/link';
+import { LoginData } from '../types/login';
 
 function LoginForm() {
   const initialValues: LoginData = {
-    email: "",
-    password: "",
+    email: '',
+    password: ''
   };
 
   const [formData, setFormData] = useState<LoginData>(initialValues);
@@ -19,14 +19,19 @@ function LoginForm() {
   };
 
   const handleLogin = () => {
-    data.append("email", formData.email);
-    data.append("password", formData.password);
+    resetForm();
+    data.append('email', formData.email);
+    data.append('password', formData.password);
     /* 
       TODO: 
-      1. Check the login
-      2. Handle the errors (if there is at least one) 
-      3. If login is successful, redirect to the chat screen
+      1. Check login
+      2. Handle errors (if there is at least one) 
     */
+  };
+
+  const resetForm = () => {
+    // data.delete('email');
+    // data.delete('password');
   };
 
   return (
@@ -50,19 +55,13 @@ function LoginForm() {
         onChange={handleInputChange}
       />
 
-      <div
-        className="content d-flex flex-column mb-5 d-flex align-items-start"
-        data-aos="fade"
-      >
+      <div className="content d-flex flex-column mb-5 d-flex align-items-start" data-aos="fade">
         <button type="submit" className="btn btn-primary" onClick={handleLogin}>
           Ingresar
         </button>
       </div>
 
-      <div
-        className="content text d-flex flex-row gap-2 mb-5 fs-6 fst-italic"
-        data-aos="fade"
-      >
+      <div className="content text d-flex flex-row gap-2 mb-5 fs-6 fst-italic" data-aos="fade">
         <span>No tienes una cuenta?</span>
         <Link href="/register" className="text-chatter-blue">
           Registrate aquí

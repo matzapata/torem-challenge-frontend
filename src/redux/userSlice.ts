@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
-import { UserDataState } from '../types/types';
+import { UserDataState } from '../types/chat';
 
 const initialState: UserDataState = {
   name: '',

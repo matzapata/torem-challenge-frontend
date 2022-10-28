@@ -2,7 +2,7 @@ import { Modal } from 'react-bootstrap';
 import { useState } from 'react';
 import FormData from 'form-data';
 
-import { ChatModalProps } from '../../types/types';
+import { ChatModalProps } from '../../types/chat';
 
 function NewChatModal(chatModalProps: ChatModalProps) {
   const { isOpen, setIsOpen } = chatModalProps;
@@ -18,8 +18,8 @@ function NewChatModal(chatModalProps: ChatModalProps) {
     /*
         TODO:
         1. Create new chat and
-        2. Update the chats queue with getChatsData to display it
-        3. Close the popup with handleClose
+        2. Update chats queue with getChatsData to display it
+        3. Close popup with handleClose
     */
   };
 

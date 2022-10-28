@@ -1,4 +1,4 @@
-import { FieldProps } from '../../types/types';
+import { FieldProps } from '../../types/chat';
 
 function Field(fieldProps: FieldProps) {
   const { title, placeholder, type, name, onChange } = fieldProps;

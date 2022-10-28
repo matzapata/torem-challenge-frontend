@@ -1,5 +1,5 @@
 import { Modal } from 'react-bootstrap';
-import { ConfirmDialogProps } from '../types/types';
+import { ConfirmDialogProps } from '../types/chat';
 
 function ConfirmDialog(confirmDialogProps: ConfirmDialogProps) {
   const { title, text, isOpen, handleCancel, handleOk } = confirmDialogProps;

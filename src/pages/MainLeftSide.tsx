@@ -1,5 +1,5 @@
 import logo from '../assets/images/logo_chatter_white.png';
-import { LogoType } from '../types/types';
+import { LogoType } from '../types/chat';
 
 function MainLeftSide() {
   const image = logo as unknown as LogoType;

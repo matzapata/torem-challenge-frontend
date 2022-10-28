@@ -1,7 +1,6 @@
 import { BiSearchAlt } from 'react-icons/bi';
-import { SearchBarProps } from '../types/types';
+import { SearchBarProps } from '../types/chat';
 import React, { useState } from 'react';
-import { NotificationFailure } from './Notifications';
 
 function SearchBar(searchBarProps: SearchBarProps) {
   const { chatId } = searchBarProps;
@@ -10,7 +9,6 @@ function SearchBar(searchBarProps: SearchBarProps) {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (chatId === '') {
-      NotificationFailure('¡Error! Debes seleccionar un chat para buscar');
       setFilter('');
     } else {
       setFilter(e.target.value);

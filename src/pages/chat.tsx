@@ -8,12 +8,12 @@ import empty from '../assets/images/empty.png';
 import MyProfile from '../components/MyProfile';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { getUser } from '../redux/userSlice';
-import { Chat, LogoType } from '../types/types';
+import { Chat, LogoType } from '../types/chat';
 import { getChats, setIsAllowedExpand } from '../redux/chatsSlice';
 import ChatHeader from '../components/HomeChat/ChatHeader';
 import ConfigDropdown from '../layout/Dropdowns/Config';
 import SearchBar from '../components/SearchBar';
-import { NotificationFailure } from '../components/Notifications';
+import { NotificationSuccess } from '../components/Notifications';
 import { socket } from '../utils/socket';
 import ChatTab from '../components/HomeChat/ChatTab';
 import ChatMessages from '../components/HomeChat/ChatMessages';
@@ -66,7 +66,7 @@ function HomeChat() {
           msg.action === 'delete' ||
           msg.action === 'create'
         ) {
-          // TODO: Get the chat data
+          // TODO: Get chat data
         }
       });
 
@@ -85,10 +85,12 @@ function HomeChat() {
       setMsgEntry('');
       /*
         TODO:
-        1. Send the message
+        1. Send message
       */
     } else {
-      NotificationFailure('¡Error! No puedes enviar un mensaje en blanco');
+      /* TODO: 
+        1. Show error notification
+      */
     }
   };
 
