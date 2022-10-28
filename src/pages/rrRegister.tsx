@@ -1,5 +1,5 @@
 import RegisterForm from '../layout/RegisterForm';
-import MainLeftSide from './MainLeftSide';
+import MainLeftSide from './mmainLeftSide';
 
 function Home() {
   return (
