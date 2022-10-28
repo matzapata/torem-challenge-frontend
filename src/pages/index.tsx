@@ -1,4 +1,4 @@
-import MainLeftSide from './mmainLeftSide';
+import MainLeftSide from './mainLeftSide';
 import LoginForm from '../layout/LoginForm';
 
 function Home() {
