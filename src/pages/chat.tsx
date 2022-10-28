@@ -165,7 +165,7 @@ function HomeChat() {
 
       {/* Si hay un chat seleccionado, muestra el chat, si no muestra la div de inicio. */}
       {selectedChat === '' ? (
-        <div className="chat-right-side empty-chats w-70 d-flex flex-column justify-content-center align-items-center align-content-center p-0 position-relative text-no-selection">
+        <div className="chat-right-side empty-chats w-70 d-flex flex-column justify-content-center align-items-center align-content-center p-0 position-relative text-no-selection overflow-hidden">
           <img className="opacity-50" src={logo.src} alt="background" />
           <div className="d-flex flex-column align-items-center justify-content-center text-chatter-black opacity-75">
             <div className="fs-3 fw-bold">CHATTER</div>

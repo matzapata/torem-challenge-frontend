@@ -69,6 +69,14 @@ footer div {
   height: 8%;
 }
 
+.footer-height {
+  height: 4%;
+}
+
+.body-height {
+  height: 88%;
+}
+
 input:focus {
   outline: none;
 }

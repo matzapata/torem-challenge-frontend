@@ -52,7 +52,7 @@ function Register() {
   return (
     <div
       id="register"
-      className="right-side d-flex flex-column justify-content-center w-50 bg-chatter-green h-100 py-4 fs-1 fw-bold scroll-y"
+      className="right-side d-flex flex-column justify-content-start w-50 bg-chatter-green h-100 py-4 fs-1 fw-bold scroll-y"
     >
       <Field
         title="NOMBRE"

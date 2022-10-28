@@ -5,7 +5,6 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { getUser, setLogoutData } from '../redux/userSlice';
 import { LogoType } from '../types/chat';
-import { toast } from 'react-toastify';
 
 function Header() {
   const image = logo as unknown as LogoType;
