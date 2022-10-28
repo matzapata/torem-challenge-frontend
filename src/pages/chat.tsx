@@ -55,10 +55,10 @@ function HomeChat() {
       ref.current.scrollTop = ref.current.scrollHeight;
       setConfigOpen((isOpen) => isOpen && chats.isAllowedExpand);
 
-      //Posicionamiento de la scroll de los chats al inicio en la "div fantasma"
+      // Posicionamiento de la scroll de los chats al inicio en la "div fantasma"
       positionRef.current.scrollIntoView();
 
-      //Obtengo respuesta del socket y actualizo los mensajes
+      // Obtengo respuesta del socket y actualizo los mensajes
       socket.on('chats', (msg) => {
         if (
           msg.action === 'ReceivedNewMessage' ||
@@ -66,7 +66,10 @@ function HomeChat() {
           msg.action === 'delete' ||
           msg.action === 'create'
         ) {
-          // TODO: Get chat data
+          /*
+            TODO: 
+            Get chat data
+          */
         }
       });
 
@@ -109,7 +112,9 @@ function HomeChat() {
   };
 
   const getChatsData = () => {
-    /* TODO: Get all chats data. */
+    /* TODO: 
+      Get all chats data 
+    */
   };
 
   return (
