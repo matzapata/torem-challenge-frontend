@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ConfirmDialog from '../../components/cconfirmDialog';
+import ConfirmDialog from '../../components/ConfirmDialog';
 import NewChatModal from '../../components/HomeChat/nnewChatModal';
 import { DropDownProps } from '../../types/chat';
 

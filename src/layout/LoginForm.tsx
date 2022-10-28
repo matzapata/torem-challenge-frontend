@@ -1,4 +1,4 @@
-import Field from '../components/Home/ffield';
+import Field from '../components/Home/Field';
 import React, { useState } from 'react';
 import FormData from 'form-data';
 import Link from 'next/link';
