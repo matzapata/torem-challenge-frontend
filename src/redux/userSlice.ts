@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from './store';
 import { UserDataState } from '../types/chat';
+import apiClient from '../utils/client';
+import { AxiosDefaultHeaders } from '../types/axiosHeaders';
 
 const initialState: UserDataState = {
   name: '',
@@ -29,6 +31,12 @@ export const userSlice = createSlice({
       state.photo = action.payload.photo;
     },
     setLogoutData: (state) => {
+      // Remove auth token from apiClient default headers 
+      apiClient.defaults.headers = {
+        ...apiClient.defaults.headers,
+        "Authorization": undefined,
+      } as AxiosDefaultHeaders;
+
       state.name = '';
       state.lastName = '';
       state.email = '';
@@ -36,7 +44,7 @@ export const userSlice = createSlice({
       state.userId = '';
       state.authToken = '';
     }
-  }
+  },
 });
 
 export const { setUserName, setLoginData, setUserData, setLogoutData } = userSlice.actions;

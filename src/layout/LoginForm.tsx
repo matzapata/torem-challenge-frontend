@@ -1,8 +1,14 @@
 import Field from '../components/Home/Field';
 import React, { useState } from 'react';
-import FormData from 'form-data';
 import Link from 'next/link';
 import { LoginData } from '../types/login';
+import { useAppDispatch } from '../redux/hooks';
+import { useRouter } from "next/router";
+import { validateEmail } from '../utils/validations';
+import apiClient from '../utils/client';
+import { LoadRemove, LoadStart } from '../components/Loading';
+import { AxiosDefaultHeaders } from '../types/axiosHeaders';
+import { setLoginData } from '../redux/userSlice';
 
 function LoginForm() {
   const initialValues: LoginData = {
@@ -11,6 +17,8 @@ function LoginForm() {
   };
 
   const [formData, setFormData] = useState<LoginData>(initialValues);
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const data = new FormData();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,24 +26,41 @@ function LoginForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleLogin = () => {
-    resetForm();
-    data.append('email', formData.email);
-    data.append('password', formData.password);
+  const handleLogin: React.FormEventHandler<HTMLFormElement> = (e) => {
     /* 
       TODO: 
-      1. Check login
+      1. Check login -> Login state checked at the React.useEffect above 
       2. Handle errors (if there is at least one) 
     */
-  };
+    e.preventDefault();
+    data.append('email', formData.email);
+    data.append('password', formData.password);
 
-  const resetForm = () => {
-    // data.delete('email');
-    // data.delete('password');
+    if (formData.password.length === 0 || formData.email.length === 0) return alert("Missing required inputs");
+    else if (!validateEmail(formData.email)) return alert("Invalid email address");
+
+    LoadStart();
+
+    apiClient.post("/login", data, { headers: { 'Content-Type': 'multipart/form-data' } })
+      .then((res) => {
+        // include authorization token as default headers so that all future requests with apiClient are authorized by default 
+        apiClient.defaults.headers = {
+          ...apiClient.defaults.headers,
+          "Authorization": res.data.token,
+        } as AxiosDefaultHeaders;
+
+        dispatch(setLoginData({ userId: res.data.userId, authToken: res.data.token }))
+        router.push("/chat").then(() => LoadRemove())
+      })
+      .catch(e => {
+        LoadRemove();
+        alert(`Error: ${e.response.data.message}`);
+      })
   };
 
   return (
-    <div
+    <form
+      onSubmit={handleLogin}
       id="login"
       className="right-side d-flex flex-column justify-content-center w-50 bg-chatter-green h-100 py-5 fs-1 fw-bold"
     >
@@ -56,7 +81,7 @@ function LoginForm() {
       />
 
       <div className="content d-flex flex-column mb-5 d-flex align-items-start" data-aos="fade">
-        <button type="submit" className="btn btn-primary" onClick={handleLogin}>
+        <button type="submit" className="btn btn-primary">
           Ingresar
         </button>
       </div>
@@ -67,7 +92,7 @@ function LoginForm() {
           Registrate aquí
         </Link>
       </div>
-    </div>
+    </form>
   );
 }
 
