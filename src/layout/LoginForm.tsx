@@ -9,6 +9,7 @@ import apiClient from '../utils/client';
 import { LoadRemove, LoadStart } from '../components/Loading';
 import { AxiosDefaultHeaders } from '../types/axiosHeaders';
 import { setLoginData } from '../redux/userSlice';
+import { NotificationFailure } from '../components/Notifications';
 
 function LoginForm() {
   const initialValues: LoginData = {
@@ -33,11 +34,12 @@ function LoginForm() {
       2. Handle errors (if there is at least one) 
     */
     e.preventDefault();
-    data.append('email', formData.email);
-    data.append('password', formData.password);
-
+    
     if (formData.password.length === 0 || formData.email.length === 0) return alert("Missing required inputs");
     else if (!validateEmail(formData.email)) return alert("Invalid email address");
+    
+    data.append('email', formData.email);
+    data.append('password', formData.password);
 
     LoadStart();
 
@@ -54,7 +56,7 @@ function LoginForm() {
       })
       .catch(e => {
         LoadRemove();
-        alert(`Error: ${e.response.data.message}`);
+        NotificationFailure(`Error: ${e.response.data.message}`)
       })
   };
 
