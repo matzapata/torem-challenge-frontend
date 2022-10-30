@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import { LoadRemove, LoadStart } from '../components/Loading';
 import { NotificationFailure, NotificationSuccess } from '../components/Notifications';
 import { validateEmail } from '../utils/validations';
+import FormData from 'form-data';
 
 function Register() {
   const initialValues: RegisterData = {

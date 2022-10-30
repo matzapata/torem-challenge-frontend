@@ -8,8 +8,9 @@ import { validateEmail } from '../utils/validations';
 import apiClient from '../utils/client';
 import { LoadRemove, LoadStart } from '../components/Loading';
 import { AxiosDefaultHeaders } from '../types/axiosHeaders';
-import { setLoginData } from '../redux/userSlice';
+import { setLoginData, setUserData } from '../redux/userSlice';
 import { NotificationFailure } from '../components/Notifications';
+import FormData from "form-data";
 
 function LoginForm() {
   const initialValues: LoginData = {
@@ -34,10 +35,10 @@ function LoginForm() {
       2. Handle errors (if there is at least one) 
     */
     e.preventDefault();
-    
+
     if (formData.password.length === 0 || formData.email.length === 0) return alert("Missing required inputs");
     else if (!validateEmail(formData.email)) return alert("Invalid email address");
-    
+
     data.append('email', formData.email);
     data.append('password', formData.password);
 
@@ -48,16 +49,26 @@ function LoginForm() {
         // include authorization token as default headers so that all future requests with apiClient are authorized by default 
         apiClient.defaults.headers = {
           ...apiClient.defaults.headers,
-          "Authorization": res.data.token,
+          "Authorization": `Bearer ${res.data.token}`,
         } as AxiosDefaultHeaders;
 
         dispatch(setLoginData({ userId: res.data.userId, authToken: res.data.token }))
-        router.push("/chat").then(() => LoadRemove())
+
+        return apiClient.get("/users")
+          .then((res) => dispatch(setUserData({
+              name: res.data.name,
+              lastName: res.data.lastName,
+              email: res.data.email,
+              photo: res.data.image,
+            })))
+          .then(() => router.push("/chat"))
+          .then(() => LoadRemove())
       })
-      .catch(e => {
+      .catch((e) => {
         LoadRemove();
         NotificationFailure(`Error: ${e.response.data.message}`)
       })
+
   };
 
   return (

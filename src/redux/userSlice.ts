@@ -24,7 +24,7 @@ export const userSlice = createSlice({
       state.userId = action.payload.userId;
       state.authToken = action.payload.authToken;
     },
-    setUserData: (state, action: PayloadAction<UserDataState>) => {
+    setUserData: (state, action: PayloadAction<Pick<UserDataState, "name" | "lastName" | "email" | "photo">>) => {
       state.name = action.payload.name;
       state.lastName = action.payload.lastName;
       state.email = action.payload.email;
