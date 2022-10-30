@@ -54,15 +54,7 @@ function LoginForm() {
 
         dispatch(setLoginData({ userId: res.data.userId, authToken: res.data.token }))
 
-        return apiClient.get("/users")
-          .then((res) => dispatch(setUserData({
-              name: res.data.name,
-              lastName: res.data.lastName,
-              email: res.data.email,
-              photo: res.data.image,
-            })))
-          .then(() => router.push("/chat"))
-          .then(() => LoadRemove())
+        router.push("/chat").then(() => LoadRemove())
       })
       .catch((e) => {
         LoadRemove();

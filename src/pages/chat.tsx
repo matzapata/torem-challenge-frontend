@@ -7,9 +7,9 @@ import { HiPhoneMissedCall } from 'react-icons/hi';
 import empty from '../assets/images/empty.png';
 import MyProfile from '../components/MyProfile';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
-import { getUser } from '../redux/userSlice';
+import { getUser, setUserData } from '../redux/userSlice';
 import { Chat, LogoType } from '../types/chat';
-import { getChats, setIsAllowedExpand } from '../redux/chatsSlice';
+import { getChats, setChatsData, setIsAllowedExpand } from '../redux/chatsSlice';
 import ChatHeader from '../components/HomeChat/ChatHeader';
 import ConfigDropdown from '../layout/Dropdowns/Config';
 import SearchBar from '../components/SearchBar';
@@ -17,6 +17,8 @@ import { NotificationSuccess } from '../components/Notifications';
 import { socket } from '../utils/socket';
 import ChatTab from '../components/HomeChat/ChatTab';
 import ChatMessages from '../components/HomeChat/ChatMessages';
+import apiClient from '../utils/client';
+import { LoadRemove, LoadStart } from '../components/Loading';
 
 function HomeChat() {
   const chatHeaderInitialState: Chat = {
@@ -48,6 +50,18 @@ function HomeChat() {
       1. Get user data 
       2. Get chats data
     */
+   LoadStart()
+   Promise.all([apiClient.get("/users"), apiClient.get("/chats")])
+    .then(([userData, chats]) => {
+      dispatch(setUserData({
+        name: userData.data.name,
+        lastName: userData.data.lastName,
+        email: userData.data.email,
+        photo: userData.data.image,
+      }))
+      dispatch(setChatsData(chats.data.chats))
+      LoadRemove();
+    })
   }, [userData]);
 
   useEffect(() => {
