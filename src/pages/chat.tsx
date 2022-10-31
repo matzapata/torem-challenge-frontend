@@ -13,7 +13,7 @@ import { getChats, setChatsData, setIsAllowedExpand } from '../redux/chatsSlice'
 import ChatHeader from '../components/HomeChat/ChatHeader';
 import ConfigDropdown from '../layout/Dropdowns/Config';
 import SearchBar from '../components/SearchBar';
-import { NotificationSuccess } from '../components/Notifications';
+import { NotificationFailure } from '../components/Notifications';
 import { socket } from '../utils/socket';
 import ChatTab from '../components/HomeChat/ChatTab';
 import ChatMessages from '../components/HomeChat/ChatMessages';
@@ -50,19 +50,19 @@ function HomeChat() {
       1. Get user data 
       2. Get chats data
     */
-   LoadStart()
-   Promise.all([apiClient.get("/users"), apiClient.get("/chats")])
-    .then(([userData, chats]) => {
-      dispatch(setUserData({
-        name: userData.data.name,
-        lastName: userData.data.lastName,
-        email: userData.data.email,
-        photo: userData.data.image,
-      }))
-      dispatch(setChatsData(chats.data.chats))
-      LoadRemove();
-    })
-  }, [userData]);
+    LoadStart()
+    Promise.all([apiClient.get("/users"), apiClient.get("/chats")])
+      .then(([userData, chats]) => {
+        dispatch(setUserData({
+          name: userData.data.name,
+          lastName: userData.data.lastName,
+          email: userData.data.email,
+          photo: userData.data.image,
+        }))
+        dispatch(setChatsData(chats.data.chats))
+        LoadRemove();
+      })
+  }, []);
 
   useEffect(() => {
     if (ref.current) {
@@ -84,6 +84,8 @@ function HomeChat() {
             TODO: 
             Get chat data
           */
+          apiClient.get("/chats")
+            .then((chats) => dispatch(setChatsData(chats.data.chats)))
         }
       });
 
@@ -99,15 +101,18 @@ function HomeChat() {
 
   const handleSendMsg = () => {
     if (msgEntry !== '') {
-      setMsgEntry('');
       /*
-        TODO:
-        1. Send message
+      TODO:
+      1. Send message
       */
+      apiClient.post(`/chats/${selectedChat}`, { message: msgEntry })
+        .then(() => setMsgEntry(''))
+        .catch(() => NotificationFailure("Error enviando mensaje"))
     } else {
       /* TODO: 
         1. Show error notification
       */
+      NotificationFailure("Mensaje vacio")
     }
   };
 
@@ -129,6 +134,9 @@ function HomeChat() {
     /* TODO: 
       Get all chats data 
     */
+    apiClient.get("/chats")
+      .then((res) => dispatch(setChatsData(res.data.chats)))
+      .catch((e) => console.error(e))
   };
 
   return (
