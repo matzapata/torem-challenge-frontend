@@ -5,6 +5,8 @@ import { IoCheckmarkDoneOutline } from 'react-icons/io5';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import { ChatTabProps } from '../../types/chat';
 import ConfirmDialog from '../ConfirmDialog';
+import apiClient from "../../utils/client";
+import { NotificationSuccess } from '../Notifications';
 
 const Container = styled.div<{ isSelected: boolean }>`
   display: flex;
@@ -102,11 +104,18 @@ function ChatTab(chatTabProps: ChatTabProps) {
     : 'No hay mensajes.';
   const lastMessageTime = messages[0] ? messages.slice(-1)[0].timeDate.slice(11, 16) + ' p.m.' : '';
 
-  const eraseChat = () => {
+  const eraseChat = async () => {
     /* 
       TODO: 
       1. Delete chat
     */
+    try {
+      await apiClient.delete(`/chats/${chatTabProps.chatId}`)
+      NotificationSuccess("Chat eliminado exitosamente")
+    } catch (e: any) {
+      NotificationSuccess(`Error: ${e.response.data.message}`)
+    }
+
   };
 
   const handleOpenModal = () => {
