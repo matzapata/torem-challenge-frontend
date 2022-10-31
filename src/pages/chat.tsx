@@ -225,6 +225,7 @@ function HomeChat() {
             </div>
 
             <div
+              id="send-message-btn"
               className="black-icon text-chatter-black fs-3 opacity-75 cursor-pointer"
               onClick={handleSendMsg}
             >

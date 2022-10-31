@@ -68,6 +68,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^10.11.0"
+    "cypress": "^10.11.0",
+    "uuid": "^9.0.0"
   }
 }

@@ -33,6 +33,7 @@ function MyApp(appProps: AppProps) {
           <Header />
 
           <ToastContainer
+            className="toast-container"
             position="top-center"
             autoClose={5000}
             hideProgressBar
