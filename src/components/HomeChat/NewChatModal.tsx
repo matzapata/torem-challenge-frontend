@@ -30,10 +30,12 @@ function NewChatModal(chatModalProps: ChatModalProps) {
     LoadStart()
 
     apiClient.post("/chats", data, { headers: { 'Content-Type': 'multipart/form-data' } })
+      .then(() => { setSelectedImage(null); setNewChatName("");  }) // Clean state
       .then(() => NotificationSuccess("Chat creado exitosamente"))
       .then(() => getChatsData())
-      .then(() => LoadRemove())
       .then(() => handleClose())
+      .catch((e) => NotificationFailure(`Error: ${e.response.data.message}`))
+      .finally(() => LoadRemove())
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

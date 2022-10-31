@@ -8,7 +8,7 @@ import { validateEmail } from '../utils/validations';
 import apiClient from '../utils/client';
 import { LoadRemove, LoadStart } from '../components/Loading';
 import { AxiosDefaultHeaders } from '../types/axiosHeaders';
-import { setLoginData, setUserData } from '../redux/userSlice';
+import { setLoginData } from '../redux/userSlice';
 import { NotificationFailure } from '../components/Notifications';
 import FormData from "form-data";
 
@@ -53,14 +53,11 @@ function LoginForm() {
         } as AxiosDefaultHeaders;
 
         dispatch(setLoginData({ userId: res.data.userId, authToken: res.data.token }))
-
-        router.push("/chat").then(() => LoadRemove())
+        setFormData(initialValues)
       })
-      .catch((e) => {
-        LoadRemove();
-        NotificationFailure(`Error: ${e.response.data.message}`)
-      })
-
+      .then(() => router.push("/chat"))
+      .catch((e) => NotificationFailure(`Error: ${e.response.data.message}`))
+      .finally(() => LoadRemove())
   };
 
   return (

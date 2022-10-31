@@ -67,15 +67,12 @@ function Register() {
     LoadStart();
 
     apiClient.post("/signup", data, { headers: { 'Content-Type': 'multipart/form-data' } })
-      .then((res) => {
-        NotificationSuccess("Cuenta creada exitosamente. Inicie sesion para acceder a su cuenta.")
-        router.push("/").then(() => LoadRemove())
-      })
-      .catch(e => {
-        LoadRemove();
-        NotificationFailure(`Error: ${e.response.data.message}`)
-      })
-  };
+      .then(() => setFormData(initialValues))
+      .then(() => NotificationSuccess("Cuenta creada exitosamente. Inicie sesion para acceder a su cuenta."))
+      .then(() => router.push("/"))
+      .catch(e => NotificationFailure(`Error: ${e.response.data.message}`))
+      .finally(() => LoadRemove())
+    };
 
   return (
     <form

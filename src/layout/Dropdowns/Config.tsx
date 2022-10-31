@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import NewChatModal from '../../components/HomeChat/NewChatModal';
 import { LoadRemove, LoadStart } from '../../components/Loading';
-import { NotificationSuccess } from '../../components/Notifications';
+import { NotificationFailure, NotificationSuccess } from '../../components/Notifications';
 import { setLogoutData } from '../../redux/userSlice';
 import { DropDownProps } from '../../types/chat';
 import apiClient from '../../utils/client';
@@ -38,7 +38,8 @@ function ConfigDropdown(dropDownProps: DropDownProps) {
       .then(() => NotificationSuccess("Se elimino la cuenta correctamente"))
       .then(() => dispatch(setLogoutData()))
       .then(() => router.push("/"))
-      .then(() => LoadRemove())
+      .catch(e => NotificationFailure(`Error: ${e.response.data.message}`)) 
+      .finally(() => LoadRemove())
 
   };
 
