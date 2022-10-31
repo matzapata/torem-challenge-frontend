@@ -7,6 +7,7 @@ import { setLogoutData } from '../../redux/userSlice';
 import { DropDownProps } from '../../types/chat';
 import apiClient from '../../utils/client';
 import { useRouter } from "next/router";
+import { useAppDispatch } from '../../redux/hooks';
 
 function ConfigDropdown(dropDownProps: DropDownProps) {
   const { getChatsData, userData, isOpen } = dropDownProps;
@@ -15,6 +16,7 @@ function ConfigDropdown(dropDownProps: DropDownProps) {
   const [newChatModalIsOpen, setNewChatModalIsOpen] = useState(false);
 
   const router = useRouter()
+  const dispatch = useAppDispatch()
 
   const handleDeleteUser = () => {
     setDelDialogIsOpen(true);
@@ -34,7 +36,7 @@ function ConfigDropdown(dropDownProps: DropDownProps) {
     LoadStart()
     apiClient.delete("/users")
       .then(() => NotificationSuccess("Se elimino la cuenta correctamente"))
-      .then(() => setLogoutData())
+      .then(() => dispatch(setLogoutData()))
       .then(() => router.push("/"))
       .then(() => LoadRemove())
 
