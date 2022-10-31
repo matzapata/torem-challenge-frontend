@@ -26,7 +26,7 @@ function Header() {
         <Navbar.Collapse className="justify-content-end">
           {userData.authToken ? (
             <Nav className="d-flex gap-3">
-              <Link href="/login" className="nav-item" onClick={signOff}>
+              <Link href="/" className="nav-item" onClick={signOff}>
                 Abandonar Sesión
               </Link>
             </Nav>
