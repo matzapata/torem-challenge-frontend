@@ -60,8 +60,9 @@ function HomeChat() {
           photo: userData.data.image,
         }))
         dispatch(setChatsData(chats.data.chats))
-        LoadRemove();
       })
+      .catch(e => NotificationFailure(`Error: ${e.response.data.message}`))
+      .finally(() => LoadRemove())
   }, []);
 
   useEffect(() => {
@@ -86,6 +87,7 @@ function HomeChat() {
           */
           apiClient.get("/chats")
             .then((chats) => dispatch(setChatsData(chats.data.chats)))
+            .catch((e) => NotificationFailure(`Error: ${e.response.data.message}`))
         }
       });
 
@@ -136,7 +138,7 @@ function HomeChat() {
     */
     apiClient.get("/chats")
       .then((res) => dispatch(setChatsData(res.data.chats)))
-      .catch((e) => console.error(e))
+      .catch(e => NotificationFailure(`Error: ${e.response.data.message}`))
   };
 
   return (
