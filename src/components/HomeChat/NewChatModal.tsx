@@ -3,12 +3,15 @@ import { useState } from 'react';
 import FormData from 'form-data';
 
 import { ChatModalProps } from '../../types/chat';
+import { NotificationFailure, NotificationSuccess } from '../Notifications';
+import apiClient from '../../utils/client';
+import { LoadRemove, LoadStart } from '../Loading';
 
 function NewChatModal(chatModalProps: ChatModalProps) {
-  const { isOpen, setIsOpen } = chatModalProps;
+  const { isOpen, setIsOpen, getChatsData } = chatModalProps;
 
   const [selectedImage, setSelectedImage] = useState<any | null>(null);
-  const [newChatName, setNewChatName] = useState<any | null>();
+  const [newChatName, setNewChatName] = useState<string>("");
 
   const data = new FormData();
 
@@ -21,6 +24,16 @@ function NewChatModal(chatModalProps: ChatModalProps) {
         2. Update chats queue with getChatsData to display it
         3. Close popup with handleClose
     */
+    if (newChatName.length === 0) return NotificationFailure("Nombre del chat es requerido")
+    else if (selectedImage === null) return NotificationFailure("Imagen del chat es requerida")
+  
+    LoadStart()
+
+    apiClient.post("/chats", data, { headers: { 'Content-Type': 'multipart/form-data' } })
+      .then(() => NotificationSuccess("Chat creado exitosamente"))
+      .then(() => getChatsData())
+      .then(() => LoadRemove())
+      .then(() => handleClose())
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
