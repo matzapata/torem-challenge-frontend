@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import ConfirmDialog from '../../components/ConfirmDialog';
 import NewChatModal from '../../components/HomeChat/NewChatModal';
+import { LoadRemove, LoadStart } from '../../components/Loading';
+import { NotificationSuccess } from '../../components/Notifications';
+import { setLogoutData } from '../../redux/userSlice';
 import { DropDownProps } from '../../types/chat';
+import apiClient from '../../utils/client';
+import { useRouter } from "next/router";
 
 function ConfigDropdown(dropDownProps: DropDownProps) {
   const { getChatsData, userData, isOpen } = dropDownProps;
 
   const [delDialogIsOpen, setDelDialogIsOpen] = useState(false);
   const [newChatModalIsOpen, setNewChatModalIsOpen] = useState(false);
+
+  const router = useRouter()
 
   const handleDeleteUser = () => {
     setDelDialogIsOpen(true);
@@ -20,9 +27,17 @@ function ConfigDropdown(dropDownProps: DropDownProps) {
   const handleConfirmDelete = () => {
     /* 
       TODO: 
-      1. Get current user data 
+      1. Get current user data?? Why? Api delete method gets user data from JWT... 
       2. Delete user 
     */
+    
+    LoadStart()
+    apiClient.delete("/users")
+      .then(() => NotificationSuccess("Se elimino la cuenta correctamente"))
+      .then(() => setLogoutData())
+      .then(() => router.push("/"))
+      .then(() => LoadRemove())
+
   };
 
   return (
